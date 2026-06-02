@@ -1,4 +1,4 @@
-# RAG Learning Journey
+# RAG From Scratch
 
 Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
