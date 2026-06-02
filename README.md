@@ -10,7 +10,7 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ✅ Phase 2: Chunking
 
-⬜ Phase 3: Embeddings
+✅ Phase 3: Embeddings
 
 ⬜ Phase 4: Vector Databases
 
@@ -41,6 +41,15 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 * Understood why chunking improves retrieval
 * Learned how metadata is preserved after chunking
 
+### Phase 3 - Embeddings
+
+* Used Sentence Transformers (`all-MiniLM-L6-v2`)
+* Generated vector embeddings from text
+* Learned how semantic similarity works
+* Used cosine similarity to compare embeddings
+* Verified that similar meanings produce higher similarity scores
+* Understood why embeddings are required before retrieval
+
 ## Current Pipeline
 
 ```text
@@ -53,12 +62,14 @@ Document Objects
 Chunking
 ↓
 Chunk Documents
+↓
+Embeddings
 ```
 
 ## Next Step
 
 ```text
-Chunk Documents
-↓
 Embeddings
+↓
+Vector Database
 ```
