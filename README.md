@@ -12,9 +12,9 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ✅ Phase 3: Embeddings
 
-⬜ Phase 4: Vector Databases
+✅ Phase 4: Vector Databases
 
-⬜ Phase 5: Retrieval
+✅ Phase 5: Retrieval
 
 ⬜ Phase 6: Prompt Construction
 
@@ -51,6 +51,22 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 * Understood how text is converted into 384-dimensional vectors
 * Learned why embeddings are required before retrieval
 
+### Phase 4 - Vector Databases
+
+* Installed and used FAISS as a local vector database
+* Stored chunk embeddings inside a searchable vector index
+* Learned how vector databases optimize similarity search
+* Understood how embeddings, chunk text, and metadata are linked together
+
+### Phase 5 - Retrieval
+
+* Performed semantic search using FAISS
+* Retrieved the top-k most relevant chunks for a query
+* Tested retrieval with age limit, salary, and qualification queries
+* Learned the impact of the k parameter on retrieval quality
+* Observed how chunk size and embeddings affect search results
+* Understood the complete retrieval flow in a RAG system
+
 ## Current Pipeline
 
 ```text
@@ -65,12 +81,20 @@ Chunking
 Chunk Documents
 ↓
 Embeddings
+↓
+FAISS Vector Database
+↓
+Retrieval
 ```
 
 ## Next Step
 
 ```text
-Embeddings
+Retrieved Chunks
 ↓
-Vector Database
+Prompt Construction
+↓
+LLM
+↓
+Generated Answer
 ```
