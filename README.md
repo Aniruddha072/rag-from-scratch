@@ -16,7 +16,7 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ✅ Phase 5: Retrieval
 
-⬜ Phase 6: Prompt Construction
+✅ Phase 6: Prompt Construction
 
 ⬜ Phase 7: Generation
 
@@ -53,19 +53,27 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ### Phase 4 - Vector Databases
 
-* Installed and used FAISS as a local vector database
-* Stored chunk embeddings inside a searchable vector index
-* Learned how vector databases optimize similarity search
-* Understood how embeddings, chunk text, and metadata are linked together
+* Used FAISS as a local vector database
+* Stored chunk embeddings in a searchable vector index
+* Learned how vector databases enable efficient similarity search
+* Understood how embeddings, chunk text, and metadata are stored together
 
 ### Phase 5 - Retrieval
 
 * Performed semantic search using FAISS
 * Retrieved the top-k most relevant chunks for a query
-* Tested retrieval with age limit, salary, and qualification queries
+* Tested retrieval with multiple queries such as salary, age limit, and qualifications
 * Learned the impact of the k parameter on retrieval quality
-* Observed how chunk size and embeddings affect search results
-* Understood the complete retrieval flow in a RAG system
+* Observed how chunk size affects retrieval performance
+* Understood the complete retrieval workflow in a RAG system
+
+### Phase 6 - Prompt Construction
+
+* Combined retrieved chunks into a single context block
+* Learned how to construct prompts dynamically using f-strings
+* Added instructions, context, and user questions into a structured prompt
+* Understood how retrieved information augments the LLM prompt
+* Learned that prompts are ultimately just formatted strings sent to an LLM
 
 ## Current Pipeline
 
@@ -85,16 +93,16 @@ Embeddings
 FAISS Vector Database
 ↓
 Retrieval
+↓
+Prompt Construction
 ```
 
 ## Next Step
 
 ```text
-Retrieved Chunks
-↓
 Prompt Construction
 ↓
 LLM
 ↓
-Generated Answer
+Answer Generation
 ```
