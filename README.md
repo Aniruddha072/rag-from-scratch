@@ -48,7 +48,8 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 * Learned how semantic similarity works
 * Used cosine similarity to compare embeddings
 * Verified that similar meanings produce higher similarity scores
-* Understood why embeddings are required before retrieval
+* Understood how text is converted into 384-dimensional vectors
+* Learned why embeddings are required before retrieval
 
 ## Current Pipeline
 

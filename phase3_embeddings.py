@@ -16,6 +16,10 @@ question = "What is the age criteria?"
 print("\nGenerating Embeddings...")
 
 question_embedding = model.encode(question)
+print("Embedding Length:", len(question_embedding))
+
+print("\nFirst 10 Values:")
+print(question_embedding[:10])
 
 chunk_a_embedding = model.encode(chunk_a)
 chunk_b_embedding = model.encode(chunk_b)
