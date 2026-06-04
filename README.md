@@ -18,9 +18,9 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ✅ Phase 6: Prompt Construction
 
-⬜ Phase 7: Generation
+✅ Phase 7: Generation
 
-⬜ Phase 8: Complete RAG
+⬜ Phase 8: RAG Improvements
 
 ⬜ Phase 9: FastAPI
 
@@ -62,7 +62,7 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 * Performed semantic search using FAISS
 * Retrieved the top-k most relevant chunks for a query
-* Tested retrieval with multiple queries such as salary, age limit, and qualifications
+* Tested retrieval using salary, age limit, qualifications, and application-related questions
 * Learned the impact of the k parameter on retrieval quality
 * Observed how chunk size affects retrieval performance
 * Understood the complete retrieval workflow in a RAG system
@@ -74,6 +74,15 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 * Added instructions, context, and user questions into a structured prompt
 * Understood how retrieved information augments the LLM prompt
 * Learned that prompts are ultimately just formatted strings sent to an LLM
+
+### Phase 7 - Generation
+
+* Integrated Groq API with Llama 3.3 70B
+* Sent retrieved context and user queries to an LLM
+* Generated answers using retrieved document information
+* Built an interactive question-answering system using terminal input
+* Added source page tracking for retrieved answers
+* Completed a full end-to-end RAG pipeline
 
 ## Current Pipeline
 
@@ -95,14 +104,33 @@ FAISS Vector Database
 Retrieval
 ↓
 Prompt Construction
+↓
+Groq Llama 3.3 70B
+↓
+Generated Answer
+```
+
+## Example Query
+
+```text
+Question:
+How to submit application?
+
+Answer:
+Candidates are requested to submit the application form through their registered email to:
+sunshine.rise@nic.in
 ```
 
 ## Next Step
 
 ```text
-Prompt Construction
+Complete RAG Pipeline
 ↓
-LLM
+Improve Retrieval Quality
 ↓
-Answer Generation
+Source Citations
+↓
+Multiple Documents
+↓
+FastAPI Integration
 ```
