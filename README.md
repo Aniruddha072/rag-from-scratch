@@ -134,3 +134,25 @@ Multiple Documents
 ↓
 FastAPI Integration
 ```
+
+## Project Structure
+
+```text
+learning/
+│
+├── Phase-wise learning scripts
+
+src/
+│
+├── loaders
+├── chunking
+├── embeddings
+├── retrieval
+├── prompts
+├── llm
+└── rag
+```
+
+The `learning` folder contains the phase-by-phase implementations used while learning RAG.
+
+The `src` folder contains the modular production-style implementation of the RAG pipeline.
