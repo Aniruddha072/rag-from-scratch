@@ -155,4 +155,5 @@ src/
 
 The `learning` folder contains the phase-by-phase implementations used while learning RAG.
 
-The `src` folder contains the modular production-style implementation of the RAG pipeline.
+The `src` folder contains the modular production-style implementation of the complete RAG pipeline.
+```
