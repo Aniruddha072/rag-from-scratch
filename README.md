@@ -20,7 +20,7 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ✅ Phase 7: Generation
 
-⬜ Phase 8: RAG Improvements
+✅ Phase 8: Production Improvements
 
 ⬜ Phase 9: FastAPI
 
@@ -51,38 +51,85 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 * Understood how text is converted into 384-dimensional vectors
 * Learned why embeddings are required before retrieval
 
-### Phase 4 - Vector Databases
+### Phase 4 - Vector Database
 
-* Used FAISS as a local vector database
-* Stored chunk embeddings in a searchable vector index
-* Learned how vector databases enable efficient similarity search
-* Understood how embeddings, chunk text, and metadata are stored together
+* Used FAISS as a vector database
+* Stored embeddings efficiently for similarity search
+* Learned how vector databases differ from traditional databases
+* Connected document chunks with their embeddings and metadata
+* Created a searchable vector store from PDF content
 
 ### Phase 5 - Retrieval
 
-* Performed semantic search using FAISS
-* Retrieved the top-k most relevant chunks for a query
-* Tested retrieval using salary, age limit, qualifications, and application-related questions
-* Learned the impact of the k parameter on retrieval quality
-* Observed how chunk size affects retrieval performance
-* Understood the complete retrieval workflow in a RAG system
+* Implemented similarity search using FAISS
+* Converted user questions into embeddings
+* Retrieved the most relevant chunks from the vector database
+* Learned the importance of the `k` parameter in retrieval
+* Understood the trade-off between retrieval quantity and relevance
 
 ### Phase 6 - Prompt Construction
 
-* Combined retrieved chunks into a single context block
-* Learned how to construct prompts dynamically using f-strings
-* Added instructions, context, and user questions into a structured prompt
-* Understood how retrieved information augments the LLM prompt
-* Learned that prompts are ultimately just formatted strings sent to an LLM
+* Built prompts dynamically using retrieved context
+* Combined context and user query into a structured prompt
+* Learned how RAG systems ground LLM responses using retrieved information
+* Understood why prompt design affects answer quality
 
 ### Phase 7 - Generation
 
 * Integrated Groq API with Llama 3.3 70B
-* Sent retrieved context and user queries to an LLM
-* Generated answers using retrieved document information
-* Built an interactive question-answering system using terminal input
-* Added source page tracking for retrieved answers
-* Completed a full end-to-end RAG pipeline
+* Sent retrieved context to an LLM
+* Generated answers based on document content
+* Built a complete end-to-end RAG pipeline
+* Implemented interactive question answering from PDFs
+
+### Phase 8 - Production Improvements
+
+* Refactored the project into a modular architecture
+* Separated responsibilities into loaders, chunking, embeddings, retrieval, prompts, llm, and rag modules
+* Added persistent FAISS storage using `save_local()`
+* Loaded existing FAISS indexes using `load_local()`
+* Eliminated unnecessary re-embedding on every run
+* Added source citations using document metadata
+* Displayed source PDF and page numbers for retrieved answers
+* Learned how production RAG systems reuse vector databases
+* Improved maintainability through structured project organization
+
+## Project Structure
+
+```text
+RAG-Learning/
+│
+├── data/
+│   └── sample.pdf
+│
+├── learning/
+│   ├── phase1_2_loading_chunking.py
+│   ├── phase3_embeddings.py
+│   ├── phase4_5_vector_db_retrieval.py
+│   ├── phase6_prompt_construction.py
+│   └── phase7_generation.py
+│
+├── src/
+│   ├── loaders/
+│   ├── chunking/
+│   ├── embeddings/
+│   ├── retrieval/
+│   ├── prompts/
+│   ├── llm/
+│   └── rag/
+│
+├── vectorstore/
+│   └── faiss_index/
+│
+├── main.py
+├── requirements.txt
+├── .env
+└── README.md
+```
+
+The `learning` folder contains the phase-by-phase implementations created while learning RAG concepts.
+
+The `src` folder contains the modular production-style implementation of the complete RAG pipeline.
 
 ## Current Pipeline
 
@@ -101,59 +148,41 @@ Embeddings
 ↓
 FAISS Vector Database
 ↓
-Retrieval
+Similarity Retrieval
 ↓
 Prompt Construction
 ↓
-Groq Llama 3.3 70B
+Groq LLM (Llama 3.3 70B)
 ↓
 Generated Answer
+↓
+Source Citations
 ```
 
-## Example Query
+## Example Output
 
 ```text
 Question:
-How to submit application?
+What is the salary?
 
-Answer:
-Candidates are requested to submit the application form through their registered email to:
-sunshine.rise@nic.in
+Generated Answer:
+The salary is Rs 21,700/- + allowances (Level-3, Cell-1)
+as per the new pay matrix of the 7th CPC.
+
+Source Information:
+--------------------
+File: data/sample.pdf
+Page: 1
 ```
 
 ## Next Step
 
 ```text
-Complete RAG Pipeline
+Current RAG Pipeline
 ↓
-Improve Retrieval Quality
+FastAPI Backend
 ↓
-Source Citations
+REST API Endpoints
 ↓
-Multiple Documents
-↓
-FastAPI Integration
-```
-
-## Project Structure
-
-```text
-learning/
-│
-├── Phase-wise learning scripts
-
-src/
-│
-├── loaders
-├── chunking
-├── embeddings
-├── retrieval
-├── prompts
-├── llm
-└── rag
-```
-
-The `learning` folder contains the phase-by-phase implementations used while learning RAG.
-
-The `src` folder contains the modular production-style implementation of the complete RAG pipeline.
+RAG API Service
 ```
