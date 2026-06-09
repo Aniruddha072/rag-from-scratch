@@ -2,6 +2,8 @@
 
 Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
+---
+
 ## Roadmap
 
 ✅ Phase 0: Environment Setup
@@ -12,7 +14,7 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ✅ Phase 3: Embeddings
 
-✅ Phase 4: Vector Databases
+✅ Phase 4: Vector Database
 
 ✅ Phase 5: Retrieval
 
@@ -22,79 +24,174 @@ Learning Retrieval-Augmented Generation (RAG) and FastAPI from scratch.
 
 ✅ Phase 8: Production Improvements
 
-⬜ Phase 9: FastAPI
+✅ Phase 9: FastAPI Integration
 
-## What I've Learned So Far
+---
 
-### Phase 1 - Document Loading
+# What I've Learned
 
-* Used PyPDFLoader to load PDFs
-* Learned LangChain Document objects
-* Explored page_content and metadata
-* Loaded a 7-page PDF successfully
+## Phase 1 - Document Loading
 
-### Phase 2 - Chunking
+- Used PyPDFLoader to load PDF documents
+- Learned about LangChain Document objects
+- Explored page_content and metadata
+- Successfully loaded multi-page PDFs
 
-* Used RecursiveCharacterTextSplitter
-* Learned chunk_size and chunk_overlap
-* Split 7 documents into 48 chunks
-* Understood why chunking improves retrieval
-* Learned how metadata is preserved after chunking
+---
 
-### Phase 3 - Embeddings
+## Phase 2 - Chunking
 
-* Used Sentence Transformers (`all-MiniLM-L6-v2`)
-* Generated vector embeddings from text
-* Learned how semantic similarity works
-* Used cosine similarity to compare embeddings
-* Verified that similar meanings produce higher similarity scores
-* Understood how text is converted into 384-dimensional vectors
-* Learned why embeddings are required before retrieval
+- Used RecursiveCharacterTextSplitter
+- Learned chunk_size and chunk_overlap
+- Split documents into smaller searchable chunks
+- Understood why chunking improves retrieval quality
+- Learned how metadata is preserved during chunking
 
-### Phase 4 - Vector Database
+---
 
-* Used FAISS as a vector database
-* Stored embeddings efficiently for similarity search
-* Learned how vector databases differ from traditional databases
-* Connected document chunks with their embeddings and metadata
-* Created a searchable vector store from PDF content
+## Phase 3 - Embeddings
 
-### Phase 5 - Retrieval
+- Used Sentence Transformers (`all-MiniLM-L6-v2`)
+- Generated vector embeddings from text
+- Learned semantic similarity concepts
+- Compared embeddings using cosine similarity
+- Understood how text becomes numerical vectors
+- Learned why embeddings are required before retrieval
 
-* Implemented similarity search using FAISS
-* Converted user questions into embeddings
-* Retrieved the most relevant chunks from the vector database
-* Learned the importance of the `k` parameter in retrieval
-* Understood the trade-off between retrieval quantity and relevance
+---
 
-### Phase 6 - Prompt Construction
+## Phase 4 - Vector Database
 
-* Built prompts dynamically using retrieved context
-* Combined context and user query into a structured prompt
-* Learned how RAG systems ground LLM responses using retrieved information
-* Understood why prompt design affects answer quality
+- Used FAISS as a vector database
+- Stored document embeddings efficiently
+- Created a searchable vector store
+- Connected chunks with embeddings and metadata
+- Learned how vector databases differ from traditional databases
 
-### Phase 7 - Generation
+---
 
-* Integrated Groq API with Llama 3.3 70B
-* Sent retrieved context to an LLM
-* Generated answers based on document content
-* Built a complete end-to-end RAG pipeline
-* Implemented interactive question answering from PDFs
+## Phase 5 - Retrieval
 
-### Phase 8 - Production Improvements
+- Implemented similarity search using FAISS
+- Converted user questions into embeddings
+- Retrieved the most relevant document chunks
+- Learned the role of the `k` parameter
+- Understood retrieval relevance and ranking
 
-* Refactored the project into a modular architecture
-* Separated responsibilities into loaders, chunking, embeddings, retrieval, prompts, llm, and rag modules
-* Added persistent FAISS storage using `save_local()`
-* Loaded existing FAISS indexes using `load_local()`
-* Eliminated unnecessary re-embedding on every run
-* Added source citations using document metadata
-* Displayed source PDF and page numbers for retrieved answers
-* Learned how production RAG systems reuse vector databases
-* Improved maintainability through structured project organization
+---
 
-## Project Structure
+## Phase 6 - Prompt Construction
+
+- Built prompts dynamically using retrieved context
+- Combined context and user questions
+- Learned grounding techniques in RAG
+- Understood how prompt design affects answer quality
+
+---
+
+## Phase 7 - Generation
+
+- Integrated Groq API
+- Used Llama 3.3 70B Versatile model
+- Sent retrieved context to an LLM
+- Generated answers from PDF content
+- Built a complete end-to-end RAG pipeline
+
+---
+
+## Phase 8 - Production Improvements
+
+### Modular Project Structure
+
+Refactored the project into a production-style architecture:
+
+- loaders
+- chunking
+- embeddings
+- retrieval
+- prompts
+- llm
+- rag
+
+### FAISS Persistence
+
+- Saved vector database locally
+- Loaded existing indexes automatically
+- Eliminated unnecessary re-embedding
+- Reduced startup time
+
+### Source Citations
+
+- Returned source document information
+- Displayed page references
+- Improved answer transparency
+- Learned how production RAG systems provide traceability
+
+---
+
+## Phase 9 - FastAPI Integration
+
+### Built REST API Endpoints
+
+Created:
+
+- GET `/`
+- POST `/ask`
+
+### Request Validation
+
+Used Pydantic models:
+
+```python
+class QuestionRequest(BaseModel):
+    question: str
+```
+
+### Swagger Documentation
+
+Used FastAPI's built-in:
+
+```text
+/docs
+```
+
+interactive API testing interface.
+
+### RAG API Service
+
+Connected:
+
+```text
+FastAPI
+↓
+RAG Pipeline
+↓
+FAISS Retrieval
+↓
+Groq LLM
+↓
+JSON Response
+```
+
+### Example Request
+
+```json
+{
+    "question": "What is the salary?"
+}
+```
+
+### Example Response
+
+```json
+{
+    "answer": "The salary is Rs 21,700/- + allowances..."
+}
+```
+
+---
+
+# Final Project Structure
 
 ```text
 RAG-Learning/
@@ -110,39 +207,60 @@ RAG-Learning/
 │   └── phase7_generation.py
 │
 ├── src/
+│   │
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── main.py
+│   │
 │   ├── loaders/
+│   │   ├── __init__.py
+│   │   └── pdf_loader.py
+│   │
 │   ├── chunking/
+│   │   ├── __init__.py
+│   │   └── text_splitter.py
+│   │
 │   ├── embeddings/
+│   │   ├── __init__.py
+│   │   └── embedding_model.py
+│   │
 │   ├── retrieval/
+│   │   ├── __init__.py
+│   │   ├── retriever.py
+│   │   └── vector_store.py
+│   │
 │   ├── prompts/
+│   │   ├── __init__.py
+│   │   └── prompt_builder.py
+│   │
 │   ├── llm/
+│   │   ├── __init__.py
+│   │   └── groq_client.py
+│   │
 │   └── rag/
+│       ├── __init__.py
+│       └── pipeline.py
 │
 ├── vectorstore/
 │   └── faiss_index/
 │
-├── main.py
-├── requirements.txt
 ├── .env
-└── README.md
+├── .gitignore
+├── requirements.txt
+├── README.md
+└── main.py
 ```
 
-The `learning` folder contains the phase-by-phase implementations created while learning RAG concepts.
+---
 
-The `src` folder contains the modular production-style implementation of the complete RAG pipeline.
-
-## Current Pipeline
+# Final Architecture
 
 ```text
 PDF
 ↓
 Document Loader
 ↓
-Document Objects
-↓
 Chunking
-↓
-Chunk Documents
 ↓
 Embeddings
 ↓
@@ -152,37 +270,73 @@ Similarity Retrieval
 ↓
 Prompt Construction
 ↓
-Groq LLM (Llama 3.3 70B)
+Groq (Llama 3.3 70B)
 ↓
 Generated Answer
 ↓
-Source Citations
+FastAPI Endpoint
+↓
+JSON Response
 ```
 
-## Example Output
+---
+
+# Key Technologies Used
+
+- Python
+- LangChain
+- Sentence Transformers
+- FAISS
+- Groq API
+- Llama 3.3 70B
+- FastAPI
+- Pydantic
+- Uvicorn
+
+---
+
+# Running the Project
+
+## Start FastAPI Server
+
+```bash
+uvicorn src.api.main:app --reload
+```
+
+---
+
+## Open Swagger UI
 
 ```text
-Question:
-What is the salary?
-
-Generated Answer:
-The salary is Rs 21,700/- + allowances (Level-3, Cell-1)
-as per the new pay matrix of the 7th CPC.
-
-Source Information:
---------------------
-File: data/sample.pdf
-Page: 1
+http://127.0.0.1:8000/docs
 ```
 
-## Next Step
+---
 
-```text
-Current RAG Pipeline
-↓
-FastAPI Backend
-↓
-REST API Endpoints
-↓
-RAG API Service
+## Ask Questions
+
+Example:
+
+```json
+{
+    "question": "What is the salary?"
+}
 ```
+
+---
+
+# Learning Outcome
+
+This project helped me understand the complete RAG pipeline from scratch:
+
+- Document Loading
+- Chunking
+- Embeddings
+- Vector Databases
+- Retrieval
+- Prompt Engineering
+- LLM Generation
+- FastAPI APIs
+- Production-Oriented Project Structure
+
+The result is a fully functional RAG API capable of answering questions from PDF documents using semantic search and a Large Language Model.

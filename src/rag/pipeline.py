@@ -7,7 +7,7 @@ from src.prompts.prompt_builder import build_prompt
 from src.llm.groq_client import ask_groq
 
 
-def run_pipeline():
+def run_pipeline(query):
 
     docs = load_pdf("data/sample.pdf")
 
@@ -20,7 +20,6 @@ def run_pipeline():
         embedding_model
     )
 
-    query = input("Enter your question: ")
 
     results = retrieve_documents(
         vectorstore,
@@ -70,3 +69,5 @@ def run_pipeline():
         )
 
         print()
+
+    return answer
